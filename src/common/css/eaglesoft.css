@@ -1,0 +1,25 @@
+html{
+    margin:0px;
+    height:100%;
+}
+
+body {
+    font-family: 宋体, Arial, Helvetica, sans-serif;
+    overflow:hidden;
+    -webkit-font-smoothing: antialiased;
+    margin:0px;
+    height:100%;
+}
+.eg-form-item {
+    margin: 15px 0;
+    height:30px;
+}
+
+.eg-label
+{
+    font-family: 宋体, Arial, Helvetica, sans-serif;
+    font-size: 10pt;color:#000000;line-height:30px;overflow:hidden;
+    white-space:nowrap; text-overflow:ellipsis; -o-text-overflow:ellipsis; overflow:hidden;
+    float: left;
+    padding:0px 3px;
+}

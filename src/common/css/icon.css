@@ -1,0 +1,199 @@
+@font-face {
+    font-family: element-icons;
+      src: url('../fonts/element-icons.eot');
+      src: url('../fonts/element-icons.eot') format('embedded-opentype'),
+           url('../fonts/element-icons.ttf') format('truetype'),
+           url('../fonts/element-icons.woff') format('woff'),
+           url('../fonts/element-icons.svg') format('svg');
+    font-weight: 400;
+    font-style: normal;
+}
+
+[class*=" eg-icon-"],[class^="eg-icon-"] {
+    font-family: element-icons!important;
+    speak: none;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    vertical-align: baseline;
+    display: inline-block;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+}
+
+.eg-icon-arrow-down:before {
+    content: "\E600"
+}
+
+.eg-icon-arrow-left:before {
+    content: "\E601"
+}
+
+.eg-icon-arrow-right:before {
+    content: "\E602"
+}
+
+.eg-icon-arrow-up:before {
+    content: "\E603"
+}
+
+.eg-icon-caret-bottom:before {
+    content: "\E604"
+}
+
+.eg-icon-caret-left:before {
+    content: "\E605"
+}
+
+.eg-icon-caret-right:before {
+    content: "\E606"
+}
+
+.eg-icon-caret-top:before {
+    content: "\E607"
+}
+
+.eg-icon-check:before {
+    content: "\E608"
+}
+
+.eg-icon-circle-check:before {
+    content: "\E609"
+}
+
+.eg-icon-circle-close:before {
+    content: "\E60A"
+}
+
+.eg-icon-circle-cross:before {
+    content: "\E60B"
+}
+
+.eg-icon-close:before {
+    content: "\E60C"
+}
+
+.eg-icon-upload:before {
+    content: "\E60D"
+}
+
+.eg-icon-d-arrow-left:before {
+    content: "\E60E"
+}
+
+.eg-icon-d-arrow-right:before {
+    content: "\E60F"
+}
+
+.eg-icon-d-caret:before {
+    content: "\E610"
+}
+
+.eg-icon-date:before {
+    content: "\E611"
+}
+
+.eg-icon-delete:before {
+    content: "\E612"
+}
+
+.eg-icon-document:before {
+    content: "\E613"
+}
+
+.eg-icon-edit:before {
+    content: "\E614"
+}
+
+.eg-icon-information:before {
+    content: "\E615"
+}
+
+.eg-icon-loading:before {
+    content: "\E616"
+}
+
+.eg-icon-menu:before {
+    content: "\E617"
+}
+
+.eg-icon-message:before {
+    content: "\E618"
+}
+
+.eg-icon-minus:before {
+    content: "\E619"
+}
+
+.eg-icon-more:before {
+    content: "\E61A"
+}
+
+.eg-icon-picture:before {
+    content: "\E61B"
+}
+
+.eg-icon-plus:before {
+    content: "\E61C"
+}
+
+.eg-icon-search:before {
+    content: "\E61D"
+}
+
+.eg-icon-setting:before {
+    content: "\E61E"
+}
+
+.eg-icon-share:before {
+    content: "\E61F"
+}
+
+.eg-icon-star-off:before {
+    content: "\E620"
+}
+
+.eg-icon-star-on:before {
+    content: "\E621"
+}
+
+.eg-icon-time:before {
+    content: "\E622"
+}
+
+.eg-icon-warning:before {
+    content: "\E623"
+}
+
+.eg-icon-delete2:before {
+    content: "\E624"
+}
+
+.eg-icon-upload2:before {
+    content: "\E627"
+}
+
+.eg-icon-view:before {
+    content: "\E626"
+}
+.eg-icon-loading {
+    animation: rotating 1s linear infinite
+}
+
+.eg-icon-right {
+    margin-left: 5px
+}
+
+.eg-icon-left {
+    margin-right: 5px
+}
+@keyframes rotating{
+    from{
+        transform: rotate(0);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
