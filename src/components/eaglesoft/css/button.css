@@ -163,26 +163,27 @@
 .eg-button-circle-icon-only{
   width: 36px;
   height: 36px;
-  padding: 10px 0px;
+  padding: 0px;
   border-radius: 50%;
 }
 .eg-button-circle-icon-only.eg-button-large{
   width: 40px;
   height: 40px;
-  padding: 11px 0;
 }
 .eg-button-circle-icon-only.eg-button-small{
   width: 28px;
   height: 28px;
-  padding: 7px 0;
 }
 .eg-button-circle-icon-only.eg-button-mini{
   width: 22px;
   height: 22px;
-  padding: 4px 0;
 }
 /*buttonGroup*/
+.eg-button-group{
+  display: inline-block;
+}
 .eg-button-group .eg-button{
+  position: relative;
   float: left;
 }
 .eg-button-group:after{
@@ -203,4 +204,57 @@
 }
 .eg-button-group .eg-button:not(:last-child){
   margin-right: -1px;
+}
+.eg-button-group .eg-button-primary:not(:first-child):not(:last-child){
+  border-left-color: rgba(255, 255, 255, .5);
+  border-right-color: rgba(255, 255, 255, .5);
+}
+.eg-button-group .eg-button-primary:first-child{
+  border-right-color: rgba(255, 255, 255, .5);
+}
+.eg-button-group .eg-button-primary:last-child{
+  border-left-color: rgba(255, 255, 255, .5);
+}
+.eg-button-group .eg-button-success:not(:first-child):not(:last-child){
+  border-left-color: rgba(255, 255, 255, .5);
+  border-right-color: rgba(255, 255, 255, .5);
+}
+.eg-button-group .eg-button-success:first-child{
+  border-right-color: rgba(255, 255, 255, .5);
+}
+.eg-button-group .eg-button-success:last-child{
+  border-left-color: rgba(255, 255, 255, .5);
+}
+.eg-button-group .eg-button-warning:not(:first-child):not(:last-child){
+  border-left-color: rgba(255, 255, 255, .5);
+  border-right-color: rgba(255, 255, 255, .5);
+}
+.eg-button-group .eg-button-warning:first-child{
+  border-right-color: rgba(255, 255, 255, .5);
+}
+.eg-button-group .eg-button-warning:last-child{
+  border-left-color: rgba(255, 255, 255, .5);
+}
+.eg-button-group .eg-button-danger:not(:first-child):not(:last-child){
+  border-left-color: rgba(255, 255, 255, .5);
+  border-right-color: rgba(255, 255, 255, .5);
+}
+.eg-button-group .eg-button-danger:first-child{
+  border-right-color: rgba(255, 255, 255, .5);
+}
+.eg-button-group .eg-button-danger:last-child{
+  border-left-color: rgba(255, 255, 255, .5);
+}
+.eg-button-group .eg-button-info:not(:first-child):not(:last-child){
+  border-left-color: rgba(255, 255, 255, .5);
+  border-right-color: rgba(255, 255, 255, .5);
+}
+.eg-button-group .eg-button-info:first-child{
+  border-right-color: rgba(255, 255, 255, .5);
+}
+.eg-button-group .eg-button-info:last-child{
+  border-left-color: rgba(255, 255, 255, .5);
+}
+.eg-button-group .eg-button:hover{
+  z-index: 1;
 }
