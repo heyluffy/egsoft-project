@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import radioManage from '@/components/manage/radioManage'
 import inputManage from '@/components/manage/inputManage'
 import buttonManage from '@/components/manage/buttonManage'
+import checkboxManage from '@/components/manage/checkboxManage'
 
 Vue.use(Router)
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/input',
       name: 'inputManage',
       component: inputManage
+    },
+    {
+      path: '/checkbox',
+      name: 'checkboxManage',
+      component: checkboxManage
     },
     {
       path: '/',

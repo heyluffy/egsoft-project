@@ -18,7 +18,7 @@ export default {
   name: 'app',
   data: function () {
     return {
-      plugs: ['Radio', 'Button', 'Input'],
+      plugs: ['Radio', 'CheckBox', 'Button', 'Input'],
       nowIndex: 0
     }
   },

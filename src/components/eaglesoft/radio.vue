@@ -1,25 +1,27 @@
 <template>
-  <label class="eg-radio-wrapper" :class="{'eg-radio-wrapper-disabled':isDisabled}">
-    <span class="eg-radio"
-      :class="{
-        'eg-radio-checked' : model === label,
-        'eg-radio-disabled' : isDisabled
-      }" 
-    >
+  <label class="eg-radio"
+   :class="{
+    'eg-radio-checked' : store === label,
+    'eg-radio-disabled' : isDisabled
+  }"
+  >
+    <span class="eg-radio-wrapper">
       <span class="eg-radio-inner"></span>
-      <input 
-        class="eg-radio-input" 
+      <input
+        class="eg-radio-input"
         type="radio"
         :value="label"
-        v-model="model"
-        :disabled="isDisabled" 
+        v-model="store"
+        :disabled="isDisabled"
+        :name="radioName"
       />
-    </span><slot>{{ label }}</slot>
+    </span><span class="eg-radio-label"><slot>{{ label }}</slot></span>
   </label>
 </template>
 <script>
 export default {
   name: 'EgRadio',
+  componentName: 'EgRadio',
   data () {
     return {
     }
@@ -32,23 +34,51 @@ export default {
       type: [String, Number],
       required: true
     },
+    name: String,
     disabled: Boolean
   },
+  methods: {
+    aaa () {
+      console.log('aaa');
+    }
+  },
   computed: {
-    radioClasses: function () {
-      return this.value === this.label ? 'eg-radio-checked' : '';
+    isGroup () {
+      // 是否为radio组
+      let parent = this.$parent;
+      while (parent) {
+        if (parent.$options.componentName === 'EgRadioGroup') {
+          this._radioGroup = parent;
+          return true;
+        } else {
+          parent = parent.$parent;
+        }
+      }
+      console.log('group');
+      return false;
     },
-    model: {
-      get: function () {
-        return this.value;
+    store: {
+      get () {
+        return this.isGroup ? this._radioGroup.value : this.value;
       },
-      set: function (val) {
-        this.$emit('input', val);
+      set (val) {
+        // radio当model值发生改变时，即被选中
+        if (this.isGroup) {
+          this._radioGroup.$emit('input', val);
+        } else {
+          this.$emit('input', val);
+          this.$emit('change', val);
+        }
       }
     },
-    isDisabled: function () {
-      return this.disabled;
+    isDisabled () {
+      return this._radioGroup ? this._radioGroup.disabled || this.disabled : this.disabled;
+    },
+    radioName () {
+      return this._radioGroup ? this._radioGroup.name : this.name;
     }
+  },
+  created () {
   }
 }
 </script>

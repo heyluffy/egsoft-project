@@ -59,11 +59,27 @@
         <eg-button type="primary">项目二</eg-button>
         <eg-button type="primary">项目三</eg-button>
       </eg-button-group>
+      <eg-button-group>
+        <eg-button disabled>昨日</eg-button>
+        <eg-button disabled>今日</eg-button>
+        <eg-button disabled>明日</eg-button>
+      </eg-button-group>
       <br /><br />
       <eg-button-group>
         <eg-button>项目一</eg-button>
         <eg-button>项目二</eg-button>
         <eg-button>项目三</eg-button>
+      </eg-button-group>
+      <br /><br />
+      <eg-button-group>
+        <eg-button shape="circle" type="success">项目一</eg-button>
+        <eg-button shape="circle" type="success">项目二</eg-button>
+        <eg-button shape="circle" type="success">项目三</eg-button>
+      </eg-button-group>
+      <eg-button-group>
+        <eg-button shape="circle" icon="edit" type="primary"></eg-button>
+        <eg-button shape="circle" icon="share" type="primary"></eg-button>
+        <eg-button shape="circle" icon="delete" type="primary"></eg-button>
       </eg-button-group>
     </div>
   </div>

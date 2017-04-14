@@ -34,7 +34,7 @@ export default {
     // button的功能类型default、primary、text等,根据不同的type给与不同的样式
     type: {
       type: String,
-      default: 'default'
+      default: ''
     },
     // button的尺寸类型
     size: {
