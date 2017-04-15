@@ -1,17 +1,21 @@
-.eg-radio-wrapper{
+.eg-radio{
   display: inline-block;
   font-size: 14px;
   color: #1f2d3d;
   white-space: nowrap;
   cursor: pointer;
-  -moz-user-select: none;
   -webkit-user-select: none;
+  -moz-user-select: none;
   -ms-user-select: none;
+  user-select: none;
 }
-.eg-radio-wrapper-disabled{
+.eg-radio+.eg-radio{
+  margin-left: 15px;
+}
+.eg-radio-disabled{
   cursor: not-allowed;
 }
-.eg-radio{
+.eg-radio-wrapper{
   position: relative;
   display: inline-block;
   line-height: 1;
@@ -38,6 +42,9 @@
   border-color: #bfcbd9;
   background: #f3f3f3;
 }
+.eg-radio-disabled .eg-radio-label{
+  color: #bbb;
+}
 .eg-radio-inner::after{
   position: absolute;
   left: 50%;
@@ -61,8 +68,96 @@
 }
 .eg-radio-input{
   position: absolute;
-  left: 0px;
-  top: 0px;
+  left: 0;
+  top: 0;
   z-index: -1;
   opacity: 0;
+}
+.eg-radio-label{
+  padding-left: 5px;
+}
+/*radioGroup*/
+.eg-radio-group{
+  display: inline-block;
+  font-size: 0;
+}
+/*radioButton*/
+/*不存在单个radioButton*/
+.eg-radio-button{
+  position: relative;
+  display: inline-block;
+}
+.eg-radio-button-input{
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  opacity: 0;
+}
+.eg-radio-button-inner{
+  display: inline-block;
+  padding: 10px 15px;
+  margin: 0px;
+  font-size: 14px;
+  line-height: 1;
+  color: #1f2d3d;
+  text-align: center;
+  border: 1px solid #bfcbd9;
+  border-left-width: 0;
+  border-radio: 0;
+  box-sizing: border-box;
+  outline: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all .2s linear;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.eg-radio-button:first-child .eg-radio-button-inner{
+  border-left-width: 1px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.eg-radio-button:last-child .eg-radio-button-inner{
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.eg-radio-button-inner:hover{
+  color: #20a0ff;
+}
+.eg-radio-button.checked .eg-radio-button-inner{
+  color: #fff;
+  background-color: #20a0ff;
+  border-color: #20a0ff;
+  box-shadow: -1px 0 0 0 #20a0ff;
+}
+.eg-radio-button.checked:first-child .eg-radio-button-inner{
+  box-shadow: none;
+}
+.eg-radio-button.disabled .eg-radio-button-inner{
+  color: #bfcbd9;
+  background-color: #f7f7f7;
+  border-color: #d1dbe5;
+  cursor: not-allowed;
+}
+.eg-radio-button.checked.disabled .eg-radio-button-inner{
+  background-color: #e6e6e6;
+  color: #fff;
+  box-shadow: none;
+}
+.eg-radio-large .eg-radio-button-inner{
+  padding: 11px 19px;
+  font-size: 16px;
+}
+.eg-radio-small .eg-radio-button-inner{
+  padding: 7px 9px;
+  font-size: 12px;
+}
+.eg-radio-mini .eg-radio-button-inner{
+  padding: 4px;
+  font-size: 12px;
 }

@@ -7,7 +7,7 @@
   import egInput from '@/components/eaglesoft/input';
   export default {
     components: {
-      'eg-input': egInput
+      egInput
     }
   }
 </script>

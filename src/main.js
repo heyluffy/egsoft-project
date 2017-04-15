@@ -9,8 +9,9 @@ import './common/css/eaglesoft.css'
 import './components/eaglesoft/css/radio.css'
 import './components/eaglesoft/css/input.css'
 import './components/eaglesoft/css/button.css'
+import './components/eaglesoft/css/checkbox.css'
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 new Vue({
@@ -18,4 +19,4 @@ new Vue({
   router,
   template: '<App/>',
   components: { App }
-})
+});
