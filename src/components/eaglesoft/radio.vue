@@ -1,8 +1,8 @@
 <template>
   <label class="eg-radio"
    :class="{
-    'eg-radio-checked' : store === label,
-    'eg-radio-disabled' : isDisabled
+    'checked' : store === label,
+    'disabled' : isDisabled
   }"
   >
     <span class="eg-radio-wrapper">

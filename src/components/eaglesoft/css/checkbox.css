@@ -72,11 +72,11 @@
   cursor: not-allowed;
 }
 .eg-checkbox.disabled .eg-checkbox-inner{
-  background: #f3f3f3;
+  background-color: #f3f3f3;
   border-color: #bfcbd9;
 }
 .eg-checkbox.checked.disabled .eg-checkbox-inner{
-  background: #ccc;
+  background-color: #ccc;
 }
 .eg-checkbox.disabled .eg-checkbox-label{
   color: #bbb;
@@ -87,5 +87,22 @@
   margin: -1px 0 0 -5px;
   border-left: 0;
   transform: rotate(0deg) scale(1);
+}
+.eg-checkbox-group{
+  display: inline-block;
+  font-size: 0;
+}
+/*.eg-checkbox.exceeded{*/
+  /*cursor: not-allowed;*/
+/*}*/
+.eg-checkbox.exceeded .eg-checkbox-inner{
+  background-color: #f3f3f3;
+  border-color: #bfcdb9;
+}
+.eg-checkbox.checked.exceeded .eg-checkbox-inner{
+  background-color: #ccc;
+}
+.eg-checkbox.exceeded .eg-checkbox-label{
+  color: #bbb;
 }
 

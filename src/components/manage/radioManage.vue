@@ -91,7 +91,7 @@ export default {
   data () {
     return {
       radio1: 'apple',
-      radio2: '50',
+      radio2: '10',
       radio3: 1,
       radio4: 1,
       radio5: 1,

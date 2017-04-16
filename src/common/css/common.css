@@ -18,6 +18,11 @@ time, mark, audio, video, input, button {
     font-weight: normal;
     vertical-align: baseline;
 }
+button, input, select, textarea{
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
 *{
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;

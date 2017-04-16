@@ -12,9 +12,6 @@
 .eg-radio+.eg-radio{
   margin-left: 15px;
 }
-.eg-radio-disabled{
-  cursor: not-allowed;
-}
 .eg-radio-wrapper{
   position: relative;
   display: inline-block;
@@ -32,19 +29,6 @@
   box-sizing: border-box;
   background: #fff;
 }
-.eg-radio-checked .eg-radio-inner, .eg-radio-inner:hover{
-  border-color: #20a0ff;
-}
-.eg-radio-disabled .eg-radio-inner:hover{
-  border-color: #bfcbd9;
-}
-.eg-radio-disabled .eg-radio-inner{
-  border-color: #bfcbd9;
-  background: #f3f3f3;
-}
-.eg-radio-disabled .eg-radio-label{
-  color: #bbb;
-}
 .eg-radio-inner::after{
   position: absolute;
   left: 50%;
@@ -59,12 +43,8 @@
   transform: scale(0);
   transition: all .2s ease-in-out;
 }
-.eg-radio-checked .eg-radio-inner::after{
-  -webkit-transform: scale(1);
-  transform: scale(1);
-}
-.eg-radio-disabled .eg-radio-inner::after{
-  background: #ccc;
+.eg-radio-inner:hover, .eg-radio.checked .eg-radio-inner{
+  border-color: #20a0ff;
 }
 .eg-radio-input{
   position: absolute;
@@ -76,6 +56,27 @@
 .eg-radio-label{
   padding-left: 5px;
 }
+.eg-radio.checked .eg-radio-inner::after{
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+.eg-radio.disabled{
+  cursor: not-allowed;
+}
+.eg-radio.disabled .eg-radio-inner{
+  border-color: #bfcbd9;
+}
+.eg-radio.disabled .eg-radio-inner{
+  border-color: #bfcbd9;
+  background: #f3f3f3;
+}
+.eg-radio.disabled .eg-radio-label{
+  color: #bbb;
+}
+.eg-radio.disabled .eg-radio-inner::after{
+  background: #ccc;
+}
+
 /*radioGroup*/
 .eg-radio-group{
   display: inline-block;
@@ -115,7 +116,6 @@
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none;
 }
 .eg-radio-button:first-child .eg-radio-button-inner{
   border-left-width: 1px;
