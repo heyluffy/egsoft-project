@@ -1,0 +1,64 @@
+.eg-dialog{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+.eg-dialog-box{
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  width: 30%;
+  transform: translateX(-50%);
+}
+.eg-dialog-animate{
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0px 1px 3px 0 rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+}
+.eg-dialog-header{
+  padding: 20px 20px 0;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.eg-dialog-title{
+  white-space: nowrap;
+}
+.eg-dialog-body{
+  padding: 20px;
+  font-size: 16px;
+  line-height: 26px;
+}
+.eg-dialog-footer{
+  padding: 0 20px 15px;
+  text-align: right;
+}
+.eg-dialog-close{
+  position: absolute;
+  top: 25px;
+  right: 20px;
+  font-size: 14px;
+  color: #bfcbd9;
+  cursor: pointer;
+}
+.eg-dialog-close:hover{
+  color: #20a0ff
+}
+.dialog-enter-active{
+  animation-name: fadeIn;
+}
+.dialog-leave-active{
+  animation-name: fadeOut;
+}
+.dialog-enter-active .eg-dialog-animate{
+   animation-name: bounceInDown;
+}
+.dialog-leave-active .eg-dialog-animate{
+   animation-name: bounceOutUp;
+}

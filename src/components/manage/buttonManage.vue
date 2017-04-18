@@ -77,9 +77,9 @@
         <eg-button shape="circle" type="success">项目三</eg-button>
       </eg-button-group>
       <eg-button-group>
-        <eg-button shape="circle" icon="edit" type="primary"></eg-button>
-        <eg-button shape="circle" icon="share" type="primary"></eg-button>
-        <eg-button shape="circle" icon="delete" type="primary"></eg-button>
+        <eg-button v-for="item in data" shape="circle" icon="edit" type="primary" v-text="item"></eg-button>
+        <!--<eg-button shape="circle" icon="share" type="primary"></eg-button>-->
+        <!--<eg-button shape="circle" icon="delete" type="primary"></eg-button>-->
       </eg-button-group>
     </div>
   </div>
@@ -91,7 +91,8 @@
     data: function () {
       return {
         disabled: true,
-        loading: [false, false]
+        loading: [false, false],
+        data: [1, 2, 3]
       }
     },
     components: {
@@ -111,6 +112,12 @@
     },
     created: function () {
       console.log(this.loading[0]);
+    },
+    mounted () {
+      let vm = this;
+      setTimeout(function () {
+        vm.data = [3, 4, 5];
+      }, 3000);
     }
   }
 </script>

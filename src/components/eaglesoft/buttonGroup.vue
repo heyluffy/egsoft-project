@@ -1,5 +1,5 @@
 <template>
- <div class="eg-button-group">
+ <div class="eg-button-group" :class="{noSpace: !hasSpace}">
    <slot></slot>
  </div>
 </template>
@@ -18,7 +18,9 @@
         default: ''
       },
       // 按钮组是否纵向排列
-      vertical: Boolean
+      vertical: Boolean,
+      // 按钮之间是否需要空隙，样式上非按钮组按钮可以利用这个属性去掉两个button之间的内联空隙
+      hasSpace: Boolean
     },
     data () {
       return {

@@ -6,10 +6,12 @@ import router from './router'
 import './common/css/common.css'
 import './common/css/icon.css'
 import './common/css/eaglesoft.css'
+import './common/css/animate.css'
 import './components/eaglesoft/css/radio.css'
 import './components/eaglesoft/css/input.css'
 import './components/eaglesoft/css/button.css'
 import './components/eaglesoft/css/checkbox.css'
+import './components/eaglesoft/css/dialog.css'
 
 Vue.config.productionTip = false;
 

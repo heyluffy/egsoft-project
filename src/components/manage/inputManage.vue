@@ -1,4 +1,5 @@
 <template>
+  <eg-data-loading>
   <div>
     <h3>Input</h3>
     <div class="group">
@@ -40,6 +41,7 @@
       </div>
     </div>
   </div>
+  </eg-data-loading>
 </template>
 <script type="text/javascript">
   import egInput from '@/components/eaglesoft/input';
