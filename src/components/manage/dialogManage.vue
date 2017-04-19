@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div style="height: 30000px;">
     <h2>Dialog</h2>
     <h3>普通弹窗</h3>
     <eg-button type="primary" @click="handleClick">打开弹窗</eg-button>
-    <eg-dialog title="标题" v-model="visible">
+    <eg-dialog title="标题" v-model="visible" @input="aaa" :show-close="false">
       <template slot="body">
         内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
       </template>
@@ -28,9 +28,12 @@
     },
     methods: {
       handleClick () {
-        console.log(111)
+//        console.log(111)
         this.visible = true;
-        console.log(this.visible)
+//        console.log(this.visible)
+      },
+      aaa () {
+        console.log('input');
       }
     },
     components: {

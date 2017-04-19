@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import emitter from './components/eaglesoft/script/emitter'
 import './common/css/common.css'
 import './common/css/icon.css'
 import './common/css/eaglesoft.css'
@@ -13,6 +14,7 @@ import './components/eaglesoft/css/button.css'
 import './components/eaglesoft/css/checkbox.css'
 import './components/eaglesoft/css/dialog.css'
 
+console.log(emitter);
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */

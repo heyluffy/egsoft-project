@@ -1,16 +1,19 @@
 <template>
   <transition
-    enter-active-class="dialog-enter-active animated"
-    leave-active-class="dialog-leave-active animated"
+    enter-active-class="dialog-enter-active eg-animated"
+    leave-active-class="dialog-leave-active eg-animated"
+    @before-enter="beforeShow"
+    @after-enter="afterShow"
+    @after-leave="afterHide"
   >
-    <div class="eg-dialog" v-if="visible">
-      <div class="eg-dialog-box">
-        <div class="eg-dialog-animate animated">
+    <div class="eg-dialog" v-if="visible" @click="dialogClose">
+      <div class="eg-dialog-box" @click.stop>
+        <div class="eg-dialog-animate eg-animated">
           <div class="eg-dialog-header">
             <slot name="title">
               <span class="eg-dialog-title" v-text="title"></span>
             </slot>
-            <i class="eg-icon-close eg-dialog-close" @click="dialogClose"></i>
+            <i class="eg-icon-close eg-dialog-close" @click="dialogClose" v-if="showClose"></i>
           </div>
           <div class="eg-dialog-body">
             <slot name="body"></slot>
@@ -28,22 +31,29 @@
     name: 'EgDialog',
     componentName: 'EgDoalog',
     data () {
-      return {
-      }
+      return {}
     },
     props: {
       title: {
         type: String,
         default: '提示'
       },
-      value: Boolean
-    },
-    components: {},
-    methods: {
-      dialogClose () {
-        this.visible = false;
+      size: {
+        type: String
+      },
+      value: Boolean,
+      // 弹窗显示时是否将body锁定滚动
+      localScroll: {
+        type: Boolean,
+        default: true
+      },
+      // 是否显示关闭按钮
+      showClose: {
+        type: Boolean,
+        default: true
       }
     },
+    components: {},
     computed: {
       visible: {
         get () {
@@ -51,12 +61,27 @@
         },
         set (val) {
           this.$emit('input', val);
-          this.$emit('close');
         }
       }
     },
+    methods: {
+      dialogClose (ev) {
+        this.visible = false;
+        this.$emit('close', ev);
+      },
+      beforeShow () {
+        this.localScroll && (document.body.style.overflow = 'hidden');
+      },
+      afterShow (ev) {
+        this.$emit('show', ev);
+      },
+      afterHide (ev) {
+        this.localScroll && (document.body.style.overflow = 'auto');
+        this.$emit('hide', ev);
+      }
+    },
     mounted () {
-      console.log(this.value);
+//      console.log(this.value);
     }
   }
 </script>
