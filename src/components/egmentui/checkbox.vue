@@ -21,8 +21,8 @@
 </template>
 <script>
   export default {
-    name: 'EgCheckBox',
-    componentName: 'EgCheckBox',
+    name: 'EgCheckbox',
+    componentName: 'EgCheckbox',
     data () {
       return {
         // 当没有使用v-model的时候，单纯用于记录checkbox点击展示效果用

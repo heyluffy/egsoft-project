@@ -44,7 +44,6 @@
   </eg-data-loading>
 </template>
 <script type="text/javascript">
-  import egInput from '@/components/eaglesoft/input';
   export default {
     data () {
       return {
@@ -65,9 +64,6 @@
       handleEnter (opt) {
         console.log(opt.value);
       }
-    },
-    components: {
-      egInput
     }
   }
 </script>

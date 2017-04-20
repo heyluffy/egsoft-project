@@ -24,10 +24,12 @@
   </button>
 </template>
 <script>
-  import emitter from '@/components/eaglesoft/script/emitter';
+  import emitter from '@/components/egmentui/script/emitter';
+  import emitterEl from '@/components/egmentui/script/mixins/emitter-el';
   export default {
     name: 'EgButton',
-    mixins: [emitter],
+    componentName: 'EgButton',
+    mixins: [emitter, emitterEl],
     data () {
       return {}
     },
@@ -78,7 +80,7 @@
       }
     },
     created: function () {
-      console.log(this.emitter);
+//      console.log(this.$emitter);
     }
   }
 </script>

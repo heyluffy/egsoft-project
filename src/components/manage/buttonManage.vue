@@ -85,19 +85,16 @@
   </div>
 </template>
 <script type="text/javascript">
-  import EgButton from '@/components/eaglesoft/button';
-  import EgButtonGroup from '@/components/eaglesoft/buttonGroup';
+  import emitter from '@/components/egmentui/script/mixins/emitter-el'
   export default {
+    componentName: 'EgButtonManage',
+    mixins: [emitter],
     data: function () {
       return {
         disabled: true,
         loading: [false, false],
         data: [1, 2, 3]
       }
-    },
-    components: {
-      EgButton,
-      EgButtonGroup
     },
     methods: {
       send (index) {
@@ -111,7 +108,7 @@
       }
     },
     created: function () {
-      console.log(this.loading[0]);
+//      console.log(this.loading[0]);
     },
     mounted () {
       let vm = this;

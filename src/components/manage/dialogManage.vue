@@ -17,9 +17,6 @@
   </div>
 </template>
 <script>
-  import EgDialog from '@/components/eaglesoft/dialog'
-  import EgButton from '@/components/eaglesoft/button'
-  import EgButtonGroup from '@/components/eaglesoft/buttonGroup'
   export default {
     data () {
       return {
@@ -35,11 +32,6 @@
       aaa () {
         console.log('input');
       }
-    },
-    components: {
-      EgDialog,
-      EgButton,
-      EgButtonGroup
     }
   }
 </script>

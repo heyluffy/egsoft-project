@@ -83,9 +83,6 @@
   </div>
 </template>
 <script>
-import egRadio from '@/components/eaglesoft/radio';
-import egRadioButton from '@/components/eaglesoft/radioButton';
-import egRadioGroup from '@/components/eaglesoft/radioGroup';
 export default {
   name: 'RadioManage',
   data () {
@@ -103,11 +100,6 @@ export default {
       radio11: 1,
       radio12: 1
     }
-  },
-  components: {
-    egRadio,
-    egRadioGroup,
-    egRadioButton
   },
   methods: {
     aaa (ev) {

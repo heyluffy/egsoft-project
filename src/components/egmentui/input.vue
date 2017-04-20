@@ -36,6 +36,7 @@
 <script>
   export default {
     name: 'EgInput',
+    componentName: 'EgInput',
     data () {
       return {
       }

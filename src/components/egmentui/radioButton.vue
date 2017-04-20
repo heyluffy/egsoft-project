@@ -19,6 +19,8 @@
 </template>
 <script>
     export default {
+      name: 'EgRadioButton',
+      componentName: 'EgRadioButton',
       props: {
         value: [String, Number],
         label: {

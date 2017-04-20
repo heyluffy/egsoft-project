@@ -6,6 +6,7 @@
 <script>
   export default {
     name: 'EgButtonGroup',
+    componentName: 'EgButtonGroup',
     props: {
       // 按钮组的尺寸
       size: {

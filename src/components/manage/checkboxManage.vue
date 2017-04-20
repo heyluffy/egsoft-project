@@ -59,9 +59,6 @@
   </div>
 </template>
 <script>
-import egCheckbox from '@/components/eaglesoft/checkbox';
-import egCheckboxGroup from '@/components/eaglesoft/checkboxGroup';
-import egButton from '@/components/eaglesoft/button';
 const cityOptions = [1, 2, 3];
 export default {
   data () {
@@ -90,11 +87,6 @@ export default {
     if (cityOptions.length === this.checkboxList2.length) {
 //      this.
     }
-  },
-  components: {
-    egCheckbox,
-    egButton,
-    egCheckboxGroup
   }
 }
 </script>
