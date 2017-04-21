@@ -8,10 +8,10 @@
         内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
       </template>
       <template slot="footer">
-        <eg-button-group has-space>
-          <eg-button type="primary" @click="visible = false">确定</eg-button>
-          <eg-button @click="visible = false">取消</eg-button>
-        </eg-button-group>
+        <!--<eg-button-group has-space>-->
+          <!--<eg-button type="primary" @click="visible = false">确定</eg-button>-->
+          <!--<eg-button @click="visible = false">取消</eg-button>-->
+        <!--</eg-button-group>-->
       </template>
     </eg-dialog>
   </div>
@@ -30,8 +30,10 @@
 //        console.log(this.visible)
       },
       aaa () {
-        console.log('input');
+//        console.log('input');
       }
+    },
+    mounted () {
     }
   }
 </script>
