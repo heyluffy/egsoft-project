@@ -47,8 +47,13 @@
         type: Boolean,
         default: true
       },
-      // 是否显示关闭按钮
+      // 是否显示右上角关闭按钮，显示则ESC按键也可生效关闭
       showClose: {
+        type: Boolean,
+        default: true
+      },
+      // 是否允许点击遮罩关闭弹窗
+      clickModalClose: {
         type: Boolean,
         default: true
       }
@@ -81,7 +86,14 @@
       }
     },
     mounted () {
-//      console.log(this.value);
+      // 监听ESC按键
+      document.onclick = function () {
+        console.log('aaa');
+      }
+      console.log(111, document.onclick);
+    },
+    destroyed () {
+      console.log('destroyed');
     }
   }
 </script>
