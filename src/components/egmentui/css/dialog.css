@@ -1,9 +1,12 @@
-.eg-dialog{
+.eg-dialog, .eg-dialog-dialog{
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+}
+.eg-dialog-dialog{
+  background: rgba(0, 0, 0, .6);
 }
 .eg-dialog-box{
   position: absolute;
