@@ -77,9 +77,9 @@
         <eg-button shape="circle" type="success">项目三</eg-button>
       </eg-button-group>
       <eg-button-group>
-        <eg-button v-for="item in data" shape="circle" icon="edit" type="primary" v-text="item"></eg-button>
-        <!--<eg-button shape="circle" icon="share" type="primary"></eg-button>-->
-        <!--<eg-button shape="circle" icon="delete" type="primary"></eg-button>-->
+        <!-- <eg-button v-for="item in data" shape="circle" icon="edit" type="primary" v-text="item"></eg-button> -->
+        <eg-button shape="circle" icon="share" type="primary"></eg-button>
+        <eg-button shape="circle" icon="delete" type="primary"></eg-button>
       </eg-button-group>
     </div>
   </div>

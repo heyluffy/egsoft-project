@@ -8,22 +8,29 @@
   >
     <div class="eg-dialog"
          v-if="visible"
-         @click="dialogClose"
-         :class="customClass ? customClass : ''"
+         @click="clickModalClose && dialogClose()"
+         :class="[customClass ? customClass : '',
+                  size ? 'eg-dialog-' + size : '']"
+         :style="{zIndex: zIndex, display: dialogHide ? 'none' : 'block'}" 
     >
-      <div class="eg-dialog-box">
+      <div class="eg-dialog-box" 
+        @click.stop 
+        :style="{
+          width: typeof width === 'number' ? width + 'px' :  width,
+          height: typeof height === 'number' ? height + 'px' :  height
+        }">
         <div class="eg-dialog-animate eg-animated">
-          <div class="eg-dialog-header">
+          <div class="eg-dialog-header" v-if="title || $slots.title">
             <slot name="title">
               <span class="eg-dialog-title" v-text="title"></span>
             </slot>
-            <i class="eg-icon-close eg-dialog-close" @click="dialogClose" v-if="showClose"></i>
+            <i class="eg-icon-close eg-dialog-close" @click="dialogClose" v-if="isShowClose"></i>
           </div>
           <div class="eg-dialog-body">
             <slot name="body"></slot>
           </div>
           <div class="eg-dialog-footer" v-if="hasFooter">
-            <template v-if="$slots.footer">
+            <template v-if="!$slots.footer">
               <eg-button-group has-space>
                 <eg-button @click="handleCancle" v-text="cancleText"></eg-button>
                 <eg-button type="primary" @click="handleConfirm" v-text="confirmText"></eg-button>
@@ -37,28 +44,37 @@
   </transition>
 </template>
 <script>
-  // import Popup from '@/components/script/utils/popup'
-  console.log(Popup);
+  import popupManage from './script/utils/eg-popup';
   export default {
     name: 'EgDialog',
-    componentName: 'EgDoalog',
-    mixins: [Popup],
+    componentName: 'EgDialog',
     data () {
-      return {}
+      return {
+        zIndex: 2000,
+        visible: this.value,
+        dialogHide: true
+      }
     },
     props: {
       title: {
         type: String,
-        default: '提示'
+        default: ''
       },
       size: {
-        type: String
+        type: String,
+        default: ''
       },
       value: Boolean,
       // 是否需要遮罩层
-      modal: {
-        type: Boolean,
-        default: true
+      // modal: {
+      //   type: Boolean,
+      //   default: true
+      // },
+      width: {
+        default: '30%'
+      },
+      height: {
+        default: 'auto'
       },
       confirmText: {
         type: String,
@@ -93,20 +109,34 @@
         type: String,
         default: ''
       },
-      // 是否将model插入body
-      modalAppendToBody: {
+      // 打开多弹窗的情况下，当前弹窗关闭是否展示pre弹窗
+      isPreShow: {
         type: Boolean,
         default: true
       }
     },
-    computed: {
-      visible: {
-        get () {
-          return this.value;
-        },
-        set (val) {
-          this.$emit('input', val);
+    watch: {
+      value (val) {
+        this.visible = val;
+      },
+      visible (val) {
+        this.$emit('input', val);
+        if (val) {
+          this.zIndex = popupManage.getZIndex();
+          // 放入打开队列
+          popupManage.add(this);
+          popupManage.hideOther();
+          popupManage.showModal();
+        } else {
+          // 从打开队列中剔除
+          popupManage.remove();
+          popupManage.recover(this.isPreShow);
         }
+      }
+    },
+    computed: {
+      isShowClose () {
+        return this.showClose && (!!this.$slots.title || !!this.title);
       }
     },
     methods: {
@@ -127,10 +157,12 @@
       },
       handleCancle (ev) {
         // 当footer为非自定义时调用
+        this.isPreShow = true;
         this.visible = false;
         this.$emit('cancle', ev);
       },
       beforeShow () {
+        this.dialogHide = false;
         this.localScroll && (document.body.style.overflow = 'hidden');
       },
       afterShow (ev) {
@@ -142,13 +174,19 @@
       }
     },
     mounted () {
-      console.log(this.transtition);
       // add ESC
-      this.showClose && document.addEventListener('keyup', this.escClose);
+      this.isShowClose && document.addEventListener('keyup', this.escClose);
+
+      // 注册实例
+      this._popupId = 'popupId_' + popupManage.getId();
+      popupManage.register(this._popupId, this);
     },
     beforeDestroy () {
       // remove Esc
-      this.showClose && document.removeEventListener('keyup', this.escClose);
+      this.isShowClose && document.removeEventListener('keyup', this.escClose);
+
+      // 销毁实例
+      popupManage.deregister(this._popupId);
     }
   }
 </script>

@@ -15,6 +15,9 @@ import './components/egmentui/css/input.css'
 import './components/egmentui/css/button.css'
 import './components/egmentui/css/checkbox.css'
 import './components/egmentui/css/dialog.css'
+import './components/egmentui/css/tree.css'
+import './components/egmentui/css/upload.css'
+import './components/egmentui/css/progress.css'
 
 Vue.config.productionTip = false;
 Vue.use(EgMentUI);

@@ -11,6 +11,9 @@ import EgInput from './input'
 import EgRadio from './radio'
 import EgRadioGroup from './radioGroup'
 import EgRadioButton from './radioButton'
+import EgTree from './tree'
+import EgUpload from './upload'
+import EgProgress from './progress'
 
 const components = {
   EgButton,
@@ -21,7 +24,10 @@ const components = {
   EgInput,
   EgRadio,
   EgRadioGroup,
-  EgRadioButton
+  EgRadioButton,
+  EgTree,
+  EgUpload,
+  EgProgress
 }
 export default {
   // Vue.use执行该函数并传入Vue

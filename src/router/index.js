@@ -5,6 +5,9 @@ import inputManage from '@/components/manage/inputManage'
 import buttonManage from '@/components/manage/buttonManage'
 import checkboxManage from '@/components/manage/checkboxManage'
 import dialogManage from '@/components/manage/dialogManage'
+import treeManage from '@/components/manage/treeManage'
+import uploadManage from '@/components/manage/uploadManage'
+import progressManage from '@/components/manage/progressManage'
 
 Vue.use(Router)
 
@@ -34,6 +37,21 @@ export default new Router({
       path: '/dialog',
       name: 'dialogManage',
       component: dialogManage
+    },
+    {
+      path: '/tree',
+      name: 'treeManage',
+      component: treeManage
+    },
+    {
+      path: '/upload',
+      name: 'uploadManage',
+      component: uploadManage
+    },
+    {
+      path: '/progress',
+      name: 'progressManage',
+      component: progressManage
     },
     {
       path: '/',
