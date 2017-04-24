@@ -1,12 +1,10 @@
 <template>
-  <eg-upload></eg-upload>   
+  <eg-upload>
+    <eg-button type="primary">点击上传</eg-button>
+  </eg-upload>
 </template>
 <script>
-export default {
-  data () {
-    return {}
-  }
-}
+  export default {}
 </script>
 <style>
 </style>
