@@ -18,7 +18,7 @@ export default {
   name: 'app',
   data: function () {
     return {
-      plugs: ['Radio', 'CheckBox', 'Button', 'Input', 'Dialog', 'Progress', 'Upload'],
+      plugs: ['Radio', 'CheckBox', 'Button', 'Input', 'Dialog', 'Progress', 'Upload', 'customForm'],
       nowIndex: 0
     }
   },
