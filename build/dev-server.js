@@ -4,6 +4,7 @@ var config = require('../config')
 if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
 }
+// var app = express()
 
 var opn = require('opn')
 var path = require('path')
@@ -11,6 +12,31 @@ var express = require('express')
 var webpack = require('webpack')
 var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = require('./webpack.dev.conf')
+
+// var apiRoutes = express.Router();
+
+// apiRoutes.get('/seller', function (req, res) {
+//   res.json({
+//     errno: 0,
+//     data: seller
+//   });
+// });
+//
+// apiRoutes.get('/goods', function (req, res) {
+//   res.json({
+//     errno: 0,
+//     data: goods
+//   });
+// });
+//
+// apiRoutes.get('/ratings', function (req, res) {
+//   res.json({
+//     errno: 0,
+//     data: ratings
+//   });
+// });
+//
+// app.use('/api', apiRoutes);
 
 // default port where dev server listens for incoming traffic
 var port = process.env.PORT || config.dev.port

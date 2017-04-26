@@ -4,6 +4,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import Upload from './components/egmentui/script/utils/upload'
 import emitter from './components/egmentui/script/emitter'
 import EgMentUI from './components/egmentui'
 import './common/css/common.css'
@@ -23,6 +24,7 @@ Vue.config.productionTip = false;
 Vue.use(EgMentUI);
 
 Vue.prototype.$emitter = emitter;
+Vue.prototype.$upload = Upload;
 
 /* eslint-disable no-new */
 new Vue({

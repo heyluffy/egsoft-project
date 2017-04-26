@@ -1,13 +1,14 @@
 <template>
   <div class="eg-upload">
-    <input
-      ref="file"
-      type="file"
-      class="eg-upload-file"
-      :multiple="multiple"
-      :accept="accept"
-      @change="handleChange"
-    />
+      <input
+        ref="file"
+        type="file"
+        class="eg-upload-file"
+        :multiple="multiple"
+        :accept="accept"
+        :id="id"
+        @change="handleChange"
+      />
     <div class="eg-upload-select" @click="handleClick">
       <slot></slot>
     </div>
@@ -16,10 +17,14 @@
   </div>
 </template>
 <script>
-  $.createU
   export default {
     name: 'egUpload',
     componentName: 'egUpload',
+    data () {
+      return {
+        id: 'aaa'
+      }
+    },
     props: {
       // 上传的地址
       action: {
@@ -50,21 +55,32 @@
     },
     methods: {
       handleChange (e) {
-        const files = e.target.files;
-
-        if (!files) return;
-
-        this.uploadFiles(files);
-
-        this.$refs.file.value = null; // test
+//        console.log(this.$refs.form);
+//        this.$refs.form.submit();
+        this.$upload.ajaxFileUpload({
+          url: 'http://127.0.0.1/upload.php',
+          fileElementId: this.id,
+          iframeId: 'iframe',
+          dataType: 'json',
+          success (data, status) {
+            if (status === 'success') {
+              alert('上传成功！');
+            }
+          }
+        })
+//        const files = e.target.files;
+//
+//        if (!files) return;
+//
+//        this.uploadFiles(files);
+//
+//        this.$refs.file.value = null; // test
       },
       handleClick () {
         this.$refs.file.click();
       },
       uploadFiles (files) {
-        console.log(files);
         let postFiles = Array.prototype.slice.call(files); // 把拥有length属性的对象转换成数组
-        console.log(postFiles);
         if (!this.multiple) {
           postFiles = postFiles.slice(0, 1);
         }
