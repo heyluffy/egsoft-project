@@ -6,6 +6,7 @@
 .eg-select-input{
   position: relative;
   display: inline-block;
+  width: 100%;
 }
 .eg-select .eg-input-inner{
   cursor: pointer;
@@ -21,7 +22,30 @@
 }
 .eg-select-dropdown{
   position: absolute;
+  z-index: 2;
   width: 100%;
   max-height: 200px;
+  padding: 6px 0;
+  border: 1px solid #d1dbe5;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0,0,0,.12),0 0 6px rgba(0,0,0,.04);
   box-sizing: border-box;
+}
+.eg-select-option{
+  width: 100%;
+  padding: 8px 10px;
+  color: #48576a;
+  line-height: 1;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.eg-select-option.hover{
+  background-color: #e4e8f1;
+}
+.eg-select-option.selected{
+  color: #fff;
+  background-color: #20a0ff
+}
+.eg-select-option.selected.hover{
+   background-color: #1c8de0
 }

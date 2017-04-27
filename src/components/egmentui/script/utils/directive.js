@@ -3,22 +3,24 @@
  * 自定义指令
  */
 import Vue from 'vue';
-const nodeList = {id: 0};
+const nodeList = {
+  id: 0
+};
 const ctx = '@@clickoutsideContext';
-
-document.addEventListener('click', function (e) {
+document.addEventListener('click', function(e) {
   const arr = Object.keys(nodeList);
-  arr.forEach(function (key) {
-    if(typeof nodeList[key] != 'Number'){
+  arr.forEach(function(key) {
+    if (typeof nodeList[key] !== 'number') {
       nodeList[key][ctx].documentHandler(e);
     }
   })
 });
 Vue.directive('clickoutside', {
-  bind (el, binding, vnode) {
+  bind(el, binding, vnode) {
     const id = nodeList.id++;
     nodeList[id] = el;
-    function documentHandler (e) {
+
+    function documentHandler(e) {
       if (el.contains(e.target)) {
         return false;
       }
@@ -31,9 +33,8 @@ Vue.directive('clickoutside', {
       documentHandler
     };
   },
-  update () {
-  },
-  unbind (el, binding) {
+  update() {},
+  unbind(el, binding) {
     delete nodeList[el[ctx].id]
   }
 })
