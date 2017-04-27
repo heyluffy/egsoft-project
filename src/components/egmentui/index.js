@@ -14,6 +14,9 @@ import EgRadioButton from './radioButton'
 import EgTree from './tree'
 import EgUpload from './upload'
 import EgProgress from './progress'
+import EgSelect from './select'
+import EgSelectOption from './selectOption'
+import EgSelectDropdown from './selectDropdown'
 
 const components = {
   EgButton,
@@ -27,7 +30,10 @@ const components = {
   EgRadioButton,
   EgTree,
   EgUpload,
-  EgProgress
+  EgProgress,
+  EgSelect,
+  EgSelectOption,
+  EgSelectDropdown
 }
 export default {
   // Vue.use执行该函数并传入Vue

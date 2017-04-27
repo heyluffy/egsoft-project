@@ -9,6 +9,7 @@ import treeManage from '@/components/manage/treeManage'
 import uploadManage from '@/components/manage/uploadManage'
 import progressManage from '@/components/manage/progressManage'
 import customForm from '@/components/manage/customForm'
+import selectManage from '@/components/manage/selectManage'
 
 Vue.use(Router)
 
@@ -53,6 +54,11 @@ export default new Router({
       path: '/progress',
       name: 'progressManage',
       component: progressManage
+    },
+    {
+      path: '/select',
+      name: 'selectManage',
+      component: selectManage
     },
     {
       path: '/customform',
