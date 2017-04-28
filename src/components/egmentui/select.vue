@@ -4,13 +4,11 @@
     v-clickoutside="handleClose"
   >
     <div class="eg-select-input" @click="handleClick">
-      <eg-input icon="caret-top" :readonly="readonly" placeholder="请选择"></eg-input>
+      <eg-input icon="caret-top" v-model="currentLabel" :readonly="readonly" placeholder="请选择"></eg-input>
     </div>
     <transition>
       <eg-select-dropdown v-show="visible" :drop-style="dropStyle">
-        <eg-select-option>111</eg-select-option>
-        <eg-select-option>222</eg-select-option>
-        <eg-select-option>333</eg-select-option>
+        <slot></slot>
       </eg-select-dropdown>
     </transition>
   </div>
@@ -21,20 +19,47 @@
       componentName: 'EgSelect',
       data () {
         return {
+          // 下拉框是否显示
           visible: false,
           dropStyle: {},
+          // select组件的标识
           isSelect: true,
+          // 存放option
           options: [],
-          hoverIndex: -1
+          // 当前hover项的下标
+          hoverIndex: -1,
+          // 当前选中项的label
+          currentLabel: ''
         }
       },
       props: {
         readonly: {
           type: Boolean,
           default: true
+        },
+        value: {
+          type: [String, Number],
+          default: ''
         }
       },
       computed: {
+        selectIndex () {
+          // 当前选中的Option index
+          if (!this.value) return -1;
+          for (let i = 0, len = this.options.length; i < len; i++) {
+            if (this.value === this.options[i].value) {
+              return i;
+            }
+          }
+          return -1;
+        },
+        currentLabel () {
+          // 当前选中的option的label
+          if (this.selectIndex > -1) {
+            return this.options[this.selectIndex].currentLabel;
+          }
+          return '';
+        }
       },
       methods: {
         handleClick () {
@@ -55,6 +80,8 @@
           };
           console.log('dropStyle', this.dropStyle)
         }
+      },
+      created () {
       },
       mounted () {
         this.setDropStyle();

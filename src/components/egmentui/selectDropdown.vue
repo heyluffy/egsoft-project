@@ -16,7 +16,6 @@
       },
       computed: {
         style () {
-          console.log(this.dropStyle);
           return this.dropStyle;
         }
       },
