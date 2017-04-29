@@ -47,18 +47,23 @@
   -ms-user-select: none;
   usr-select: none;
 }
-.eg-input.disabled
+.eg-input.disabled .eg-input-icon{
+  cursor: not-allowed;
+}
 /*size*/
 .eg-input-large .eg-input-inner{
   height: 40px;
+  font-size: 16px;
   line-height: 24px;
 }
 .eg-input-small .eg-input-inner{
   height: 28px;
+  font-size: 13px;
   line-height: 22px;
 }
 .eg-input-mini .eg-input-inner{
   height: 22px;
+  font-size: 12px;
   line-height: 16px;
 }
 /*icon*/

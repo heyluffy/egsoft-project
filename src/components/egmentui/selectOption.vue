@@ -1,61 +1,70 @@
 <template>
   <div class="eg-select-option"
-    :class="{
-      hover: parent.hoverIndex === index,
-      selected: parent.selectIndex === index
+       :class="{
+      hover: parent.hoverIndex === index && !disabled,
+      selected: parent.value === value && !disabled,
+      disabled: disabled
     }"
-   @mouseenter="hoverItem"
-   @click="handleClick"
-   >
+       @mouseenter="hoverItem"
+       @click="handleClick"
+  >
     <slot><span v-text="currentLabel"></span></slot>
   </div>
 </template>
 <script>
-    export default {
-      name: 'EgSelectOption',
-      componentName: 'EgSelectOption',
-      data () {
-        return {
-          parent: null,
-          index: -1
-        }
-      },
-      props: {
-        value: {
-          type: [String, Number],
-          require: true
-        },
-        label: [String, Number]
-      },
-      methods: {
-        hoverItem () {
-          this.parent.hoverIndex = this.index;
-        },
-        handleClick () {
-          this.parent.$emit('input', this.value);
-        },
-        getParent () {
-          // 获取select父节点
-          let parent = this.$parent;
-          while (parent && !parent.isSelect) {
-            parent = parent.$parent;
-          }
-          this.parent = parent || null;
-        }
-      },
-      computed: {
-        currentLabel () {
-          return this.label || this.value;
-        }
-      },
-      created () {
-        this.getParent();
-        this.index = this.parent.options.push(this) - 1;
-      },
-      mounted () {
-        // console.log(this);
+  export default {
+    name: 'EgOption',
+    componentName: 'EgOption',
+    data () {
+      return {
+        // select
+        parent: null,
+        // 当前option的下标
+        index: -1
       }
+    },
+    props: {
+      value: {
+        type: [String, Number],
+        require: true
+      },
+      label: [String, Number],
+      disabled: Boolean
+    },
+    methods: {
+      hoverItem () {
+        this.parent.hoverIndex = this.index;
+      },
+      handleClick () {
+        if (!this.disabled) {
+          this.parent.$emit('input', this.value);
+          this.parent.visible = false;
+        }
+      },
+      getParent () {
+        // 获取select父节点
+        let parent = this.$parent;
+        while (parent && !parent.isSelect) {
+          parent = parent.$parent;
+        }
+        this.parent = parent || null;
+      }
+    },
+    computed: {
+      currentLabel () {
+        return this.label || this.value;
+      }
+    },
+    beforeCreate () {
+    },
+    created () {
+      this.getParent();
+      this.index = this.parent.options.push(this) - 1;
+    },
+    mounted () {
+      // console.log(this);
     }
+  }
 </script>
 <style>
 </style>
