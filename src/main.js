@@ -21,6 +21,8 @@ import './components/egmentui/css/tree.css'
 import './components/egmentui/css/upload.css'
 import './components/egmentui/css/progress.css'
 import './components/egmentui/css/select.css'
+import './components/egmentui/css/tag.css'
+import './components/egmentui/css/loading.css'
 
 Vue.config.productionTip = false;
 Vue.use(EgMentUI);

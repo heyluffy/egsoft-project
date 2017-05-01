@@ -1,7 +1,7 @@
 .eg-input{
   position: relative;
   display: inline-block;
-  width: 100%;
+  width: 240px;
   font-size: 14px;
 }
 .eg-input-inner{
@@ -36,6 +36,18 @@
 }
 .eg-input-inner::placeholder{
   color: #97a8be;
+}
+.eg-input-large{
+  width: 300px;
+  font-size: 16px;
+}
+.eg-input-small{
+  width: 200px;
+  font-size: 13px;
+}
+.eg-input-mini{
+  width: 160px;
+  font-size: 12px;
 }
 .eg-input.disabled .eg-input-inner{
   color: #bbb;
@@ -119,5 +131,44 @@
 /*sug*/
 .eg-input-sug{
   position: absolute;
+  left: 0px;
   width: 100%;
+  max-height: 200px;
+  overflow: auto;
+  padding: 6px 0;
+  background-color: #fff;
+  border: 1px solid #d1dbe5;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0,0,0,.12),0 0 6px rgba(0,0,0,.04);
+  box-sizing: border-box;
+  -webkit-transform: scaleY(1);
+  transform: scaleY(1);
+  -webkit-transform-origin: center top;
+  transform-origin: center top;
+}
+.eg-input-sug-item{
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding: 8px 10px;
+  line-height: 1;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.eg-input-sug-item:hover, .eg-input-sug-item.key{
+  background-color: #e4e8f1;
+}
+.eg-input-sug-item.selected{
+  color: #fff;
+  background-color: #20a0ff
+}
+.sug-enter, .sug-leave-active{
+  -webkit-transform: scaleY(0);
+  transform: scaleY(0);
+  opacity: 0;
+}
+.sug-enter-active, .sug-leave-active{
+  -webkit-transition: all .3s ease-out;
+  transition: all .3s ease-out;
 }

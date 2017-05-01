@@ -4,23 +4,27 @@
         'eg-select-visible': visible,
         'disabled': disabled,
         'clearable': clearable,
-        'selected': selectIndex > -1
+        'selected': selected
         },
         size ? 'eg-select-' + size : ''
       ]"
        v-clickoutside="handleClose"
   >
-    <div class="eg-select-input" @mouseenter="setIcon(1)" @mouseleave="setIcon(0)" @click="!disabled && handleClick()">
-      <div class="eg-select-list">
-        <div class="eg-select-tag">
-          111
-        </div>
+    <div class="eg-select-input" @mouseenter="!multiple && setIcon(1)" @mouseleave="!multiple && setIcon(0)"
+         @click="!disabled && handleClick()">
+      <div ref="selectList" class="eg-select-list" v-if="multiple">
+        <eg-tag v-for="item in selectIndexArr" closable @icon-click.stop="deleteTag(item)">
+          {{options[item].currentLabel}}
+        </eg-tag>
+        <input ref="filterInput" v-if="filterable" type="text" class="eg-filter-input" v-model="filterText" @input="handleInput" />
       </div>
-      <eg-input @on-icon-click="handleIconClick" :icon="currentIcon" v-model="currentLabel" :size="size"
-                :disabled="disabled" :readonly="readonly" :placeholder="placeholder"></eg-input>
+      <eg-input ref="input" @on-input="handleInput" @on-icon-click="handleIconClick" :icon="currentIcon"
+                v-model="currentLabel" :size="size"
+                :disabled="disabled" :readonly="isReadonly" :placeholder="currentPlaceholder"></eg-input>
     </div>
     <transition name="drop" @after-leave="handleHide">
-      <eg-select-dropdown v-show="visible" :drop-style="dropStyle">
+      <eg-select-dropdown ref="drop" v-show="visible" :drop-style="dropStyle">
+        <div v-if="!isFound" class="not-found" v-text="noFoundText"></div>
         <slot></slot>
       </eg-select-dropdown>
     </transition>
@@ -42,10 +46,18 @@
         options: [],
         // 当前hover项的下标
         hoverIndex: -1,
-//        selectIndex: -1,
-//        selectIndexArr: [],
+        // 单选选中下标
+        selectIndex: -1,
+        // 多选选中下标集合
+        selectIndexArr: [],
+        // 键盘控制的下标
+        keyIndex: -1,
         currentIcon: icons[0],
-        currentLabel: ''
+        // 单选当前选中label
+        currentLabel: '',
+        noFoundText: '无匹配数据',
+        isFound: true,
+        filterText: ''
       }
     },
     props: {
@@ -63,51 +75,47 @@
       placeholder: {
         type: String,
         default: '请选择'
-      }
+      },
+      // 是否可搜索
+      filterable: Boolean
     },
     computed: {
-      selectIndex () {
-        // 当前选中的Option index
-        if (!this.value || this.multiple) return -1;
-        for (let i = 0, len = this.options.length; i < len; i++) {
-          if (this.value === this.options[i].value) {
-            return i;
-          }
+      selected () {
+        if (this.multiple && this.selectIndexArr.length === 0) {
+          return false;
         }
-        return -1;
+        if (!this.multiple && this.selectIndex === -1) {
+          return false;
+        }
+        return true;
       },
-      selectIndexArr () {
-        if (!this.multiple) return [];
-        const obj = {};
-        const arr = [];
-        for (let i = 0, len = this.value.length; i < len; i++) {
-          obj[this.value[i]] = true;
+      currentPlaceholder () {
+        if (this.multiple && this.selectIndexArr.length > 0) {
+          return '';
         }
-        console.log(this.options.length);
-        for (let i = 0, len = this.options.length; i < len; i++) {
-          console.log('getValue');
-          if (obj[this.options[i].value]) {
-            console.log('getValue');
-            arr.push(i);
-          }
-        }
-        return arr;
+        return this.placeholder;
       },
-      currentLabel () {
-        // 当前选中的option的label
-        if (this.selectIndex > -1) {
-          return this.options[this.selectIndex].currentLabel;
+      isReadonly () {
+        if (this.filterable && !this.multiple) {
+          return false;
         }
-        return '';
-      },
-      curPlaceholder () {
-//        if (this.multiple && this.selectIndexArr.length > 0) {
-//          return this.placeholder;
-//        }
-//        return this.placeholder;
+        return true;
       }
     },
-    watch: {},
+    watch: {
+      value () {
+        this.recover();
+      },
+      filterText (val) {
+        $(this.$refs.filterInput).width(val.length * 14 + 20);
+        this.recover();
+      },
+      visible (val) {
+        if (val && this.filterable) {
+          this.multiple ? $(this.$refs.filterInput).focus() : $(this.$refs.input.$el).find('input').focus();
+        }
+      }
+    },
     methods: {
       handleClick () {
         this.visible = !this.visible;
@@ -117,17 +125,18 @@
       },
       setDropStyle () {
         const select = $(this.$el);
-        // const wTop = select.offset().top - $(window).scrollTop();
-        // const wLeft= select.offset().left - $(window).scrollLeft();
+        let vm = this;
         this.dropStyle = {
           position: 'absolute',
-          left: select.position().left + 'px',
-          top: (select.position().top + select.height() + 3) + 'px',
+          left: '0px',
+          top: (select.height() + 3) + 'px',
           width: select.width() + 'px'
-        };
+        }
       },
       handleHide () {
         this.hoverIndex = -1;
+        this.keyIndex = -1;
+        this.resetFilter();
       },
       setIcon (index) {
         if (this.clearable && this.selectIndex > -1) {
@@ -135,39 +144,120 @@
         }
       },
       handleIconClick (opts) {
-//        console.log('event', e);
         if (this.clearable && this.selectIndex > -1) {
           opts.event.stopPropagation();
           this.$emit('input', '');
           this.currentIcon = icons[0];
         }
       },
-      getLabel () {
-        // 单选 获取选中label
-        this.currentLable = '';
+      getSelectIndex () {
+        // 单选 获取selectIndex
+        this.selectIndex = -1;
+        this.currentLabel = '';
         if (!this.value) return;
         for (let i = 0, len = this.options.length; i < len; i++) {
           if (this.value === this.options[i].value) {
-            this.currentLable = this.options[i].currentLable;
+            this.selectIndex = i;
+            this.currentLabel = this.options[i].currentLabel;
             return;
           }
         }
       },
-      getMutipleLabel () {
-        // 多选 获取选中label
-        this.currentLable = [];
-//        if (!this.multiple) return [];
-//        const obj = {};
-//        const arr = [];
-//        for (let i = 0, len = this.value.length; i < len; i++) {
-//          obj[this.value[i]] = true;
-//        }
-//        for (let i = 0, len = this.options.length; i < len; i++) {
-//          console.log('getValue');
-//          if (obj[this.options[i].value]) {
-//            console.log('getValue');
-//            arr.push(i);
-//        }
+      getMulSelectIndex () {
+        // 多选 获取selectIndexArr
+        this.selectIndexArr = [];
+        const obj = {};
+        if (!this.multiple) return;
+        for (let i = 0, len = this.value.length; i < len; i++) {
+          obj[this.value[i]] = true;
+        }
+        for (let i = 0, len = this.options.length; i < len; i++) {
+          if (obj[this.options[i].value]) {
+            this.selectIndexArr.push(i);
+          }
+        }
+      },
+      deleteTag (index) {
+        let arr = this.value.concat([]);
+        arr.splice(this.value.indexOf(this.options[index].value), 1);
+        this.$emit('input', arr);
+      },
+      setInputHeight() {
+        if (this.multiple && $(this.$refs.selectList).height() > 0) {
+          $(this.$refs.input.$el).find('.eg-input-inner').height($(this.$refs.selectList).height());
+        }
+      },
+      recover () {
+        this.multiple ? this.getMulSelectIndex() : this.getSelectIndex();
+        this.$nextTick(function () {
+          this.setInputHeight();
+          this.setDropStyle();
+        })
+      },
+      navigateOptions (type) {
+        if (!this.isFound) return;
+        if (type === 'up' && --this.keyIndex < 0) {
+          this.keyIndex = this.options.length - 1;
+        }
+        if (type === 'down' && ++this.keyIndex > this.options.length - 1) {
+          this.keyIndex = 0;
+        }
+        if (this.options[this.keyIndex].disabled || !this.options[this.keyIndex].show) {
+          this.navigateOptions(type);
+        }
+      },
+      handleKeyDown (e) {
+        if (this.visible) {
+          const keyCode = e.keyCode;
+          switch (keyCode) {
+            case 27:
+              // esc
+              e.preventDefault();
+              this.visible = false;
+              break;
+            case 38:
+              // up
+              e.preventDefault();
+              this.navigateOptions('up');
+              break;
+            case 40:
+              // down
+              e.preventDefault();
+              this.navigateOptions('down');
+              break;
+            case 13:
+              // enter
+              if (this.keyIndex > -1 && this.keyIndex < this.options.length && this.options[this.keyIndex].show) {
+                this.options[this.keyIndex].handleClick();
+              }
+              break;
+          }
+        }
+      },
+      handleInput (e) {
+        if (this.filterable) {
+          const vm = this;
+          const val = e.target.value;
+          this.visible = true;
+          this.isFound = false;
+          this.options.forEach(function (option) {
+            if (option.currentLabel.toLowerCase().indexOf($.trim(val.toLowerCase())) === -1) {
+              option.show = false;
+            } else {
+              option.show = true;
+              vm.isFound = true;
+            }
+          })
+        }
+      },
+      resetFilter () {
+        if (this.filterable) {
+          this.options.forEach(function (option) {
+            option.show = true;
+          });
+          this.isFound = true;
+          this.currentLabel = this.selectIndex > -1 ? this.options[this.selectIndex].currentLabel : '';
+        }
       }
     },
     beforeCreate () {
@@ -175,8 +265,11 @@
     created () {
     },
     mounted () {
-      this.setDropStyle();
-      this.multiple ? this.getMutipleLabel() : this.getLabel();
+      this.recover();
+      document.addEventListener('keydown', this.handleKeyDown);
+    },
+    beforeDestroy () {
+      document.removeEventListener('keydown', this.handleKeyDown);
     }
   }
 </script>

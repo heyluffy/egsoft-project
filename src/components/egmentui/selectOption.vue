@@ -1,12 +1,13 @@
 <template>
   <div class="eg-select-option"
        :class="{
-      hover: parent.hoverIndex === index && !disabled,
-      selected: parent.value === value && !disabled,
+      hover: (parent.hoverIndex === index  || parent.keyIndex === index) && !disabled,
+      selected: selected,
       disabled: disabled
     }"
        @mouseenter="hoverItem"
        @click="handleClick"
+       v-if="show"
   >
     <slot><span v-text="currentLabel"></span></slot>
   </div>
@@ -19,8 +20,8 @@
       return {
         // select
         parent: null,
-        // 当前option的下标
-        index: -1
+        index: -1,
+        show: true
       }
     },
     props: {
@@ -35,10 +36,16 @@
       hoverItem () {
         this.parent.hoverIndex = this.index;
       },
-      handleClick () {
-        if (!this.disabled) {
+      handleClick (e) {
+        if (!this.parent.multiple && !this.disabled) {
           this.parent.$emit('input', this.value);
           this.parent.visible = false;
+        }
+        if (this.parent.multiple && !this.disabled) {
+          let arr = this.parent.value.concat([]);
+          let index = arr.indexOf(this.value);
+          index !== -1 ? arr.splice(index, 1) : arr.push(this.value);
+          this.parent.$emit('input', arr);
         }
       },
       getParent () {
@@ -53,6 +60,13 @@
     computed: {
       currentLabel () {
         return this.label || this.value;
+      },
+      selected () {
+        if (!this.parent.multiple) {
+          return this.parent.selectIndex === this.index && !this.disabled;
+        } else {
+          return this.parent.selectIndexArr.indexOf(this.index) !== -1 && !this.disabled;
+        }
       }
     },
     beforeCreate () {

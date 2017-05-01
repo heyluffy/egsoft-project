@@ -17,6 +17,9 @@ import EgProgress from './progress'
 import EgSelect from './select'
 import EgSelectOption from './selectOption'
 import EgSelectDropdown from './selectDropdown'
+import EgOptionGroup from './optionGroup'
+import EgTag from './tag'
+import EgLoading from './loading'
 
 const components = {
   EgButton,
@@ -33,7 +36,10 @@ const components = {
   EgProgress,
   EgSelect,
   EgSelectOption,
-  EgSelectDropdown
+  EgSelectDropdown,
+  EgTag,
+  EgLoading,
+  EgOptionGroup
 }
 export default {
   // Vue.use执行该函数并传入Vue

@@ -18,7 +18,7 @@ export default {
   name: 'app',
   data: function () {
     return {
-      plugs: ['Radio', 'CheckBox', 'Button', 'Input', 'Dialog', 'Progress', 'Upload', 'Select', 'customForm'],
+      plugs: ['Radio', 'CheckBox', 'Button', 'Input', 'Dialog', 'Progress', 'Tag', 'loading', 'Upload', 'Select', 'customForm'],
       nowIndex: 0
     }
   },
@@ -80,5 +80,6 @@ export default {
     padding: 30px 0;
     font-size: 14px;
     overflow: auto;
+    box-sizing: border-box;
   }
 </style>

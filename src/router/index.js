@@ -10,6 +10,8 @@ import uploadManage from '@/components/manage/uploadManage'
 import progressManage from '@/components/manage/progressManage'
 import customForm from '@/components/manage/customForm'
 import selectManage from '@/components/manage/selectManage'
+import tagManage from '@/components/manage/tagManage'
+import loadingManage from '@/components/manage/loadingManage'
 
 Vue.use(Router)
 
@@ -64,6 +66,16 @@ export default new Router({
       path: '/customform',
       name: 'customform',
       component: customForm
+    },
+    {
+      path: '/tag',
+      name: 'tagManage',
+      component: tagManage
+    },
+    {
+      path: '/loading',
+      name: 'loadingManage',
+      component: loadingManage
     },
     {
       path: '/',
