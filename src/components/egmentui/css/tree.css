@@ -1,0 +1,30 @@
+.eg-tree{
+  font-size: 14px;
+}
+.eg-tree-node{
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+}
+.eg-tree-icon{
+  position: absolute;
+  top: 9px;
+  left: 8px;
+  width: 0px;
+  height: 0px;
+  content: '';
+  border: 8px dashed transparent;
+  border-left: 8px solid #97a8be;
+  -webkit-transition: transform .3s ease;
+  transition: transform .3s ease;
+  -webkit-transform-origin: 25% center;
+  transform-origin: 25% center;
+}
+.eg-tree-node.expanded>.eg-tree-icon{
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+.eg-tree-content{
+  padding: 10px 0;
+  line-height: 1;
+}

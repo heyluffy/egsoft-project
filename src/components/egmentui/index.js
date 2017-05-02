@@ -12,6 +12,7 @@ import EgRadio from './radio'
 import EgRadioGroup from './radioGroup'
 import EgRadioButton from './radioButton'
 import EgTree from './tree'
+import EgTreeNode from './treeNode'
 import EgUpload from './upload'
 import EgProgress from './progress'
 import EgSelect from './select'
@@ -32,6 +33,7 @@ const components = {
   EgRadioGroup,
   EgRadioButton,
   EgTree,
+  EgTreeNode,
   EgUpload,
   EgProgress,
   EgSelect,
