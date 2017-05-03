@@ -9,7 +9,6 @@ export default {
   componentName: 'egTree',
   data () {
     return {
-      treeNodes: []
     }
   },
   props: {

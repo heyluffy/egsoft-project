@@ -33,8 +33,8 @@
       return {
         expanded: this.data.expanded,
         checked: this.data.checked,
-        indeterminate: false,
         treeNodes: [],
+        indeterminate: false,
         childrenChecked: 0
       }
     },
@@ -45,14 +45,18 @@
     },
     watch: {
       data () {
-        console.log('chage');
       },
       expanded (val) {
         this.data.expanded = val;
 //        this.$set(this.data, 'expanded', val);
       },
-      checked (val) {
+      checked (val, oldVal) {
 //        this.$set(this.data, 'checked', val);
+        if (val === oldVal) {
+          this.checkedSize++;
+        } else {
+          this.checkedSize = 0;
+        }
         this.data.checked = val;
       }
     },
@@ -60,8 +64,7 @@
       parent () {
         let parent = this.$parent;
         while (parent) {
-          console.log(parent);
-          if (parent.$options.componentName === 'EgTreeNode' || parent.$options.componentName === 'EgTree') {
+          if (parent.$options.componentName === 'EgTreeNode') {
             return parent;
           }
           parent = parent.$parent;
@@ -94,7 +97,7 @@
 //        console.log(evt.target.checked)
         const val = evt.target.checked;
         this.setChildren(val);
-        this.setParent(val);
+        this.setParent(val, this.childrenChecked  + 1);
       },
       setChildren (val) {
         for (let i = 0, len = this.treeNodes.length; i < len; i++) {
@@ -102,19 +105,26 @@
           val ? this.childrenChecked++ : this.childrenChecked--;
         }
       },
-      setParent (val) {
-        if (this.parent && this.parent.$options.componentName === 'EgTreeNode') {
-          val ? this.parent.childrenChecked++ : this.parent.childrenChecked--;
-          this.parent.indeterminate = !!this.parent.childrenChecked && (this.parent.treeNodes.length > this.parent.childrenChecked);
-          console.log(this.parent.indeterminate);
-          this.parent.checked = this.parent.childrenChecked ? !this.parent.indeterminate : false;
+      setParent (val, len) {
+//        console.log(this.parent.$options.componentName);
+        if (this.checkedSize > 0) {
+          return;
         }
-      },
+        console.log(this.checkedSize);
+        if (this.parent && this.parent.$options.componentName === 'EgTreeNode') {
+          val ? this.parent.childrenChecked += len  : this.parent.childrenChecked -= len;
+          this.parent.indeterminate = !!this.parent.childrenChecked && (this.parent.treeNodes.length > this.parent.childrenChecked);
+          this.parent.checked = this.parent.childrenChecked ? !this.parent.indeterminate : false;
+          this.parent.setParent(val);
+        }
+      }
     },
     mounted () {
       if (this.parent) {
         this.parent.treeNodes.push(this);
         this.checked && this.parent.childrenChecked++;
+        this.parent.treeNodes = this.parent.treeNodes.concat(this.treeNodes);
+        this.parent.childrenChecked = this.parent.childrenChecked + this.childrenChecked;
       }
 //      console.log(this.parent);
     }
