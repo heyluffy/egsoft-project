@@ -3,13 +3,12 @@
 }
 .eg-tree-node{
   position: relative;
-  padding-left: 30px;
   cursor: pointer;
 }
 .eg-tree-icon{
   position: absolute;
   top: 9px;
-  left: 8px;
+  left: 12px;
   width: 0px;
   height: 0px;
   content: '';
@@ -20,11 +19,26 @@
   -webkit-transform-origin: 25% center;
   transform-origin: 25% center;
 }
-.eg-tree-node.expanded>.eg-tree-icon{
+.eg-tree-node.expanded>.eg-tree-text>.eg-tree-icon{
   -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
 }
 .eg-tree-content{
+  display: inline-block;
   padding: 10px 0;
   line-height: 1;
+}
+.eg-tree-children{
+  height: auto;
+  overflow: hidden;
+}
+.eg-tree-text, .eg-tree-children{
+  padding-left: 30px;
+}
+.slide-enter, .slide-leave-active{
+  height: 0px!important;
+}
+.slide-enter-active, .slide-leave-active{
+  transition: all .3s ease;
+  -webkit-transition: all .3s ease;
 }

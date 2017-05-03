@@ -16,7 +16,7 @@
              @change="handleChange"
              :store="store"
       />
-    </span><span class="eg-checkbox-label" :name="name"><slot>{{label}}</slot></span>
+    </span><span class="eg-checkbox-label" :name="name" v-if="label || $slots.default"><slot>{{label}}</slot></span>
   </label>
 </template>
 <script>
@@ -27,7 +27,8 @@
       return {
         // 当没有使用v-model的时候，单纯用于记录checkbox点击展示效果用
         selfModel: false,
-        isExceeded: false
+        isExceeded: false,
+        isClickEvt: false
       }
     },
     props: {
@@ -71,20 +72,13 @@
           return val !== undefined ? val : this.selfModel;
         },
         set (val) {
-          let vm = this._checkboxGroup || this;
+          let vm = this.isGroup && this._checkboxGroup || this;
           if (this.isLimitExceeded(val)) {
             return false;
           }
           this.isGroup && this.doLimit(val);
           vm.$emit('input', val);
           this.selfModel = val;
-          if (this.isClickEvt) {
-            vm.$emit('change', {
-              event: this.isClickEvt,
-              value: val
-            });
-            this.isClickEvt = false;
-          }
         }
       },
       isChecked () {
@@ -145,7 +139,7 @@
         }
       },
       handleChange (evt) {
-        this.isClickEvt = evt;
+        this.$emit('on-change', evt);
       }
     },
     mounted () {
