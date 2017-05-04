@@ -158,7 +158,6 @@
         }
       },
       handleKeydown (e) {
-        console.log(123);
         if (this.visible) {
           const keyCode = e.keyCode;
           switch (keyCode) {
